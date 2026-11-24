@@ -2,6 +2,7 @@ package com.example.todoapp.api;
 
 import java.util.List;
 import java.net.URI;
+import java.time.LocalDate;
 
 import com.example.todoapp.Todo;
 import com.example.todoapp.TodoService;
@@ -34,8 +35,10 @@ public class TodoApiController {
     public List<TodoDto> todos(
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String category,
-            @RequestParam(required = false) String order) {
-        return todoService.search(keyword, category, order)
+            @RequestParam(required = false) String order,
+            @RequestParam(required = false) LocalDate from,
+            @RequestParam(required = false) LocalDate to) {
+        return todoService.search(keyword, category, order, from, to)
                 .stream()
                 .map(TodoDto::from)
                 .toList();

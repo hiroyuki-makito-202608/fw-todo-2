@@ -33,7 +33,7 @@ public class HomeController {
                 ? null
                 : category;
         String normalizedOrder = "desc".equals(order) ? "desc" : "asc";
-        model.addAttribute("todos", todoService.search(keyword, normalizedCategory, normalizedOrder));
+        model.addAttribute("todos", todoService.search(keyword, normalizedCategory, normalizedOrder, null, null));
         model.addAttribute("keyword", keyword == null ? "" : keyword);
         model.addAttribute("category", normalizedCategory == null ? "" : normalizedCategory);
         model.addAttribute("order", normalizedOrder);
