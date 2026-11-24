@@ -40,3 +40,36 @@ GET http://localhost:8080/api/holidays
 
 ### 7. 祝日APIのパラメータ付き
 GET http://localhost:8080/api/todos?from=2026-04-01&to=2026-04-30
+
+### 就職活動の準備 1
+POST http://localhost:8080/api/todos
+Content-Type: application/json
+
+{
+  "title": "履歴書を見直す",
+  "category": "就職活動",
+  "priority": 1,
+  "dueDate": "2026-04-04"
+}
+
+### 就職活動の準備 2
+POST http://localhost:8080/api/todos
+Content-Type: application/json
+
+{
+  "title": "企業研究をする",
+  "category": "就職活動",
+  "priority": 2,
+  "dueDate": "2026-04-04"
+}
+
+### 就職活動の準備 3
+POST http://localhost:8080/api/todos
+Content-Type: application/json
+
+{
+  "title": "面接の回答を練習する",
+  "category": "就職活動",
+  "priority": 3,
+  "dueDate": "2026-04-04"
+}

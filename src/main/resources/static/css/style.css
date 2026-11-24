@@ -124,6 +124,19 @@ body {
     margin-bottom: 12px;
 }
 
+.calendar-navigation-months,
+.calendar-navigation-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.calendar-todo-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
 .calendar-table {
     width: 100%;
     table-layout: fixed;

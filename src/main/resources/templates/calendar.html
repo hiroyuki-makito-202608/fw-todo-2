@@ -11,8 +11,14 @@
     <main class="container calendar-page">
         <h1 class="page-title" th:text="${monthTitle}">年月</h1>
         <nav class="calendar-navigation" aria-label="月の移動">
-            <a class="link" th:href="@{/calendar(year=${previousYear},month=${previousMonth})}">前の月</a>
-            <a class="link" th:href="@{/calendar(year=${nextYear},month=${nextMonth})}">次の月</a>
+            <div class="calendar-navigation-months">
+                <a class="link" th:href="@{/calendar(year=${previousYear},month=${previousMonth})}">前の月</a>
+                <a class="link" th:href="@{/calendar(year=${nextYear},month=${nextMonth})}">次の月</a>
+            </div>
+            <div class="calendar-navigation-actions">
+                <a class="link" href="/todos">表で見る</a>
+                <a class="btn" href="/todos/new">新規登録</a>
+            </div>
         </nav>
         <table class="calendar-table" th:attr="data-from=${firstDay},data-to=${lastDay}">
             <thead>
@@ -46,6 +52,7 @@
 
             document.querySelectorAll(".calendar-table td[data-date]").forEach((cell) => {
                 const date = cell.dataset.date;
+                const dayTodos = todos.filter((todo) => todo.dueDate === date);
                 const dayOfWeek = new Date(`${date}T00:00:00`).getDay();
                 if (holidays[date]) {
                     cell.style.backgroundColor = "#f8d7da";
@@ -56,13 +63,22 @@
                     cell.style.backgroundColor = "#e3f2fd";
                 }
 
-                todos
-                    .filter((todo) => todo.dueDate === date)
-                    .forEach((todo) => {
-                        const name = document.createElement("div");
-                        name.textContent = todo.title;
-                        cell.appendChild(name);
-                    });
+                dayTodos.slice(0, 3).forEach((todo) => {
+                    const name = document.createElement("a");
+                    name.href = `/todos/${todo.id}/edit`;
+                    name.className = "calendar-todo-link";
+                    name.textContent = todo.title;
+                    if (todo.dueDate < new Date().toLocaleDateString("sv-SE") && !todo.completed) {
+                        name.style.color = "red";
+                    }
+                    cell.appendChild(name);
+                });
+
+                if (dayTodos.length > 3) {
+                    const more = document.createElement("div");
+                    more.textContent = `ほか ${dayTodos.length - 3}件`;
+                    cell.appendChild(more);
+                }
             });
         }
 
