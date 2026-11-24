@@ -1,0 +1,39 @@
+### 1. 1件登録する
+POST http://localhost:8080/api/todos
+Content-Type: application/json
+
+{
+  "title": "時間変更後のテスト",
+  "category": "プログラミング",
+  "priority": 2,
+  "dueDate": "2026-12-01"
+}
+
+### 2. 1件取得する
+GET http://localhost:8080/api/todos/1
+
+### 3. 1件更新する
+PUT http://localhost:8080/api/todos/1
+Content-Type: application/json
+
+{
+  "title": "APIの使い方を確認して記録する",
+  "detail": "HTTPリクエストを試す",
+  "category": "プログラミング",
+  "priority": 2,
+  "dueDate": "2026-12-01",
+  "completed": false
+}
+
+### 4. 1件削除する
+DELETE http://localhost:8080/api/todos/1
+
+### 追加
+GET http://localhost:8080/api/todos?category=デザイン
+
+### 5. 祝日を直接取ってくる
+GET https://holidays-jp.github.io/api/v1/date.json
+### の行と GET の行は分けます。### と同じ行に書いたものは区切りの名前として扱われるので、つなげて書くと送られません。
+
+### 6. 自分のアプリの祝日API
+GET http://localhost:8080/api/holidays
