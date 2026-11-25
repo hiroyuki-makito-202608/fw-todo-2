@@ -33,6 +33,21 @@ public class TodoService {
         log.info("Todo updated id={}", todo.getId());
     }
 
+    public void updateProvidedFields(Todo todo, boolean updateTitle, boolean updateDetail,
+            boolean updateCategory, boolean updatePriority, boolean updateDueDate) {
+        if (!(updateTitle || updateDetail || updateCategory || updatePriority || updateDueDate)) {
+            return;
+        }
+        todoMapper.updateProvidedFields(todo, updateTitle, updateDetail, updateCategory,
+                updatePriority, updateDueDate);
+        log.info("Todo selected fields updated id={}", todo.getId());
+    }
+
+    public void setCompleted(Long id, Boolean completed) {
+        todoMapper.updateCompleted(id, completed);
+        log.info("Todo completion updated id={} completed={}", id, completed);
+    }
+
     public void delete(Long id) {
         todoMapper.deleteById(id);
         log.info("Todo deleted id={}", id);

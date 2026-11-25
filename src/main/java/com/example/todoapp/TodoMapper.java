@@ -17,5 +17,14 @@ public interface TodoMapper {
 
     int update(Todo todo);
 
+    int updateProvidedFields(@Param("todo") Todo todo,
+            @Param("updateTitle") boolean updateTitle,
+            @Param("updateDetail") boolean updateDetail,
+            @Param("updateCategory") boolean updateCategory,
+            @Param("updatePriority") boolean updatePriority,
+            @Param("updateDueDate") boolean updateDueDate);
+
+    int updateCompleted(@Param("id") Long id, @Param("completed") Boolean completed);
+
     int deleteById(@Param("id") Long id);
 }

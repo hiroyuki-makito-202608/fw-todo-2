@@ -46,6 +46,22 @@
             completed = #{completed}
         WHERE id = #{id}
     </update>
+    <update id="updateProvidedFields">
+        UPDATE todos
+        <set>
+            <if test="updateTitle">title = #{todo.title},</if>
+            <if test="updateDetail">detail = #{todo.detail},</if>
+            <if test="updateCategory">category = #{todo.category},</if>
+            <if test="updatePriority">priority = #{todo.priority},</if>
+            <if test="updateDueDate">due_date = #{todo.dueDate},</if>
+        </set>
+        WHERE id = #{todo.id}
+    </update>
+    <update id="updateCompleted">
+        UPDATE todos
+        SET completed = #{completed}
+        WHERE id = #{id}
+    </update>
     <delete id="deleteById" parameterType="long">
         DELETE FROM todos
         WHERE id = #{id}

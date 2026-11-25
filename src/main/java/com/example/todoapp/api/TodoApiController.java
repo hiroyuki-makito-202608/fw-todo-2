@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,6 +77,15 @@ public class TodoApiController {
         Todo todo = toTodo(request);
         todo.setId(id);
         todoService.update(todo);
+        return ResponseEntity.ok(TodoDto.from(todoService.findById(id)));
+    }
+
+    @PatchMapping("/api/todos/{id}/completion")
+    public ResponseEntity<?> setCompletion(@PathVariable Long id, @RequestParam Boolean completed) {
+        if (todoService.findById(id) == null) {
+            return notFound(id);
+        }
+        todoService.setCompleted(id, completed);
         return ResponseEntity.ok(TodoDto.from(todoService.findById(id)));
     }
 

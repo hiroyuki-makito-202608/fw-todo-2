@@ -60,7 +60,7 @@ Content-Type: application/json
   "title": "企業研究をする",
   "category": "就職活動",
   "priority": 2,
-  "dueDate": "2026-04-04"
+  "dueDate": "2026-04-05"
 }
 
 ### 就職活動の準備 3
@@ -71,5 +71,44 @@ Content-Type: application/json
   "title": "面接の回答を練習する",
   "category": "就職活動",
   "priority": 3,
-  "dueDate": "2026-04-04"
+  "dueDate": "2026-04-06"
 }
+
+### MCP
+POST http://localhost:8080/mcp
+
+
+### MCP2
+### 7. 窓口と会話を始める
+POST http://localhost:8080/mcp
+Content-Type: application/json
+Accept: application/json, text/event-stream
+
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-06-18",
+    "capabilities": {},
+    "clientInfo": { "name": "requests.http", "version": "1.0" }
+  }
+}
+
+### 8. 道具の一覧をもらう
+POST http://localhost:8080/mcp
+Content-Type: application/json
+Accept: application/json, text/event-stream
+Mcp-Session-Id: e894db67-e99d-4db4-84a8-1b780be70bf3
+
+{ "jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {} }
+
+
+### 9. 道具を1つ呼んでみる
+POST http://localhost:8080/mcp
+Content-Type: application/json
+Accept: application/json, text/event-stream
+Mcp-Session-Id: 7d215078-9cfe-4ba7-b906-b0bea0cdea6e
+
+{ "jsonrpc": "2.0", "id": 3, "method": "tools/call",
+  "params": { "name": "list_todos", "arguments": {} } }
